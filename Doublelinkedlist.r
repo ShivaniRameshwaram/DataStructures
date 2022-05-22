@@ -37,14 +37,61 @@ addFirst<-function(llist,new){
   }
   llist
 }
-LList<-dlinkListNode(5,create_emptyenv(),dlinkListNode(4,LList,dlinkListNode(3,LList$nextnode,create_emptyenv())))
+
+addLast<-function(llist,last){
+  if (isEmpty(llist)){
+    llist<-dlinkListNode(last)
+  }else{
+    temp<-new.env(parent = create_emptyenv())
+    temp<-llist
+    k=1
+    listsize<-sizeLinkList(llist)
+    while(k<listsize){
+      temp<-temp$nextnode
+      k=k+1
+    }
+    
+    last$prevnode<-temp
+    temp$nextnode<-last
+  }
+  llist
+}
+
+InsertIndex<-function(new,pos,llist)
+{  if (isEmpty(llist)) {
+  warning("Empty List")
+}
+  else{
+   
+    temp<-new.env(parent = create_emptyenv())
+    temp<-llist
+    i=1
+    while(i<pos)
+    { prev<-temp
+      temp<-temp$nextnode
+      i=i+1
+     
+    }
+    new$nextnode<-temp
+    new$prevnode<-prev
+    prev$nextnode<-new
+    temp$prevnode<-new
+  }
+  llist
+}
+
+
+LList<-dlinkListNode(5,create_emptyenv(),dlinkListNode(4,LList,dlinkListNode(3,LList$nextnode,)))
 listsize<-sizeLinkList(LList)
 new<-dlinkListNode(10)
 LList<-addFirst(LList,new)
+last<-dlinkListNode(15)
+LList<-addLast(LList,last)
+index<-dlinkListNode(17)
+LList<-InsertIndex(index,3,LList)
 listsize<-sizeLinkList(LList)
 temp<-new.env(create_emptyenv())
 temp<-LList
-i=listsize
 j=1
 while(j<=listsize)
 {  cat(temp$element," <- ")
@@ -52,9 +99,3 @@ while(j<=listsize)
   j=j+1
 }
 cat("NULL")
-#while(i>0 )
-#{
-#  print(temp$element)
-#  temp<-temp$prevnode
-#  i=i-1
-#}
