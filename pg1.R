@@ -1,0 +1,7 @@
+k = as.integer(readline(prompt = "enter the value of k"))
+arr = c(1,2,3,4,5,6,7,9,33,22,44,11,44,54,111,8)
+arr1=c((sort(arr)))
+print(max(arr))
+print(min(arr))
+print(arr1)
+print(arr1[k])
